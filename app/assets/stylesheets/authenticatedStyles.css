@@ -1,0 +1,14 @@
+/* Custom sidebar styling */
+.custom-sidebar {
+    background-color: #343a40; /* Dark gray */
+    color: #fff; /* White text */
+  }
+  
+  .custom-sidebar a {
+    color: #fff; /* White links */
+  }
+  
+  .custom-sidebar .bi {
+    color: #fff; /* White icons */
+  }
+  

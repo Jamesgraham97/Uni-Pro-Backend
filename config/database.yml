@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  port: 5432
+  username: postgres
+  password: imtilted420
+
+development:
+  <<: *default
+  database: uni_pro_application_development
+
+test:
+  <<: *default
+  database: uni_pro_application_test
+
+production:
+  <<: *default
+  database: uni_pro_application_production
+  username: uni_pro
+  password: <%= ENV['UNI_PRO_DATABASE_PASSWORD'] %>
+  host: <%= ENV['UNI_PRO_DATABASE_HOST'] %>
+  port: <%= ENV['UNI_PRO_DATABASE_PORT'] %>
