@@ -1,4 +1,10 @@
+
 class Assignment < ApplicationRecord
-  belongs_to :corsemodule
-  belongs_to :user
+  belongs_to :course_module, optional: true
+  belongs_to :user, optional: true
+  
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :status, presence: true
+  validates :priority, presence: true
 end

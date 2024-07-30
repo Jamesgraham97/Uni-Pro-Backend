@@ -1,0 +1,19 @@
+notification_job:
+    cron: "0 17 * * *"  # Runs every day at 5 PM
+    class: "NotificationJob"
+    queue: default
+
+  recommendation_job:
+    cron: "0 * * * *"  # Runs every hour
+    class: "RecommendationJob"
+    queue: default
+
+  daily_summary_job:
+    cron: "0 8 * * *"  # Runs every day at 8 AM
+    class: "DailySummaryJob"
+    queue: default
+
+  urgent_task_reminder_job:
+    cron: "0 16 * * *"  # Runs every day at 4 PM
+    class: "UrgentTaskReminderJob"
+    queue: default

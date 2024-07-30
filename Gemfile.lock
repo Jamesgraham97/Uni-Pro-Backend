@@ -50,6 +50,11 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_storage_validations (1.1.4)
+      activejob (>= 5.2.0)
+      activemodel (>= 5.2.0)
+      activestorage (>= 5.2.0)
+      activesupport (>= 5.2.0)
     activejob (7.1.3.2)
       activesupport (= 7.1.3.2)
       globalid (>= 0.3.6)
@@ -93,11 +98,16 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chronic (0.10.2)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
+    database_cleaner-active_record (2.2.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -108,9 +118,33 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-jwt (0.12.1)
+      devise (~> 4.0)
+      warden-jwt_auth (~> 0.10)
     diff-lcs (1.5.1)
     drb (2.2.1)
+    dry-auto_inject (1.0.1)
+      dry-core (~> 1.0)
+      zeitwerk (~> 2.6)
+    dry-configurable (1.2.0)
+      dry-core (~> 1.0, < 2)
+      zeitwerk (~> 2.6)
+    dry-core (1.0.1)
+      concurrent-ruby (~> 1.0)
+      zeitwerk (~> 2.6)
     erubi (1.12.0)
+    et-orbi (1.2.11)
+      tzinfo
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
+    faker (3.4.2)
+      i18n (>= 1.8.11, < 2)
+    fugit (1.11.0)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -126,6 +160,9 @@ GEM
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jwt (2.8.2)
+      base64
+    logger (1.6.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -164,8 +201,11 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.2)
       activesupport (>= 3.0.0)
+    raabro (1.4.0)
     racc (1.7.3)
     rack (3.0.11)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -205,6 +245,8 @@ GEM
     rake (13.2.1)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
+    redis-client (0.22.2)
+      connection_pool
     regexp_parser (2.9.1)
     reline (0.5.6)
       io-console (~> 0.5)
@@ -230,11 +272,25 @@ GEM
       rspec-support (~> 3.10)
     rspec-support (3.13.1)
     rubyzip (2.3.2)
+    rufus-scheduler (3.9.1)
+      fugit (~> 1.1, >= 1.1.6)
     selenium-webdriver (4.20.1)
       base64 (~> 0.2)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (6.2.0)
+      activesupport (>= 5.2.0)
+    sidekiq (7.3.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
+    sidekiq-scheduler (5.0.5)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 6, < 8)
+      tilt (>= 1.4.0, < 3)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -242,21 +298,21 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stimulus-rails (1.3.3)
-      railties (>= 6.0.0)
     stringio (3.1.0)
     thor (1.3.1)
+    tilt (2.4.0)
     timeout (0.4.1)
-    turbo-rails (2.0.5)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2024.1)
       tzinfo (>= 1.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
+    warden-jwt_auth (0.10.0)
+      dry-auto_inject (>= 0.8, < 2)
+      dry-configurable (>= 0.13, < 2)
+      jwt (~> 2.1)
+      warden (~> 1.2)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -267,6 +323,8 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.13)
@@ -276,25 +334,33 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  active_storage_validations
   bcrypt (~> 3.1.7)
   bootsnap
   capybara
   cssbundling-rails
+  database_cleaner-active_record
   debug
   devise
+  devise-jwt
+  factory_bot_rails
+  faker
   importmap-rails
   jbuilder
   pg (~> 1.1)
   puma (>= 5.0)
   pundit
+  rack-cors
   rails (~> 7.1.3, >= 7.1.3.2)
-  rspec-rails (~> 5.0, >= 5.0.2)
+  rspec-rails
   selenium-webdriver
+  shoulda-matchers
+  sidekiq
+  sidekiq-scheduler
   sprockets-rails
-  stimulus-rails
-  turbo-rails
   tzinfo-data
   web-console
+  whenever
 
 RUBY VERSION
    ruby 3.2.4p170
