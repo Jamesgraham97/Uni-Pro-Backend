@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V1
     class FriendshipsController < ApplicationController
@@ -11,7 +9,7 @@ module Api
                      current_user.inverse_friendships.where(status: 'accepted').pluck(:user_id)
         friends = User.where(id: friend_ids.uniq)
 
-        render json: friends
+        render json: friends, each_serializer: UserSerializer
       end
 
       def create

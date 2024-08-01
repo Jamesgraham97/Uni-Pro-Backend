@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   mount ActionCable.server => '/cable'
   get 'test_notification', to: 'api/v1/notifications#test_notification'
 
@@ -72,5 +73,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: redirect('/api/v1/assignments')
+  # Redirect root to a basic info page or 404
+  root to: 'home#index'
+  get '*path', to: 'home#index', constraints: ->(request) { !request.xhr? && request.format.html? }
 end
