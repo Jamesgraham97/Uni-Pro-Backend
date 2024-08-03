@@ -7,14 +7,6 @@ default: &default
   username: <%= ENV['DATABASE_USERNAME'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
 
-development:
-  <<: *default
-  database: uni_pro_application_development
-
-test:
-  <<: *default
-  database: uni_pro_application_test
-
 production:
   <<: *default
   database: uni_pro_application_production

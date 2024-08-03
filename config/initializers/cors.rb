@@ -1,12 +1,12 @@
-# frozen_string_literal: true
-
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3001' # Replace with your frontend URL if different
+    origins 'https://jamesgraham97.github.io', 'https://unipro.hopto.org'
+
     resource '*',
-             headers: :any,
-             methods: %i[get post put patch delete options head],
-             expose: ['ETag'], # Expose any headers that your frontend might need
-             credentials: true
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      credentials: true,
+      max_age: 600,
+      expose: ['access-token', 'expiry', 'token-type', 'uid', 'client']
   end
 end
