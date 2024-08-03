@@ -12,11 +12,14 @@ const io = socketIo(server, {
     origin: '*',
     methods: ['GET', 'POST'],
   },
+  path: '/signaling'
 });
+
+const signalingNamespace = io.of('/signaling'); // Create the /signaling namespace
 
 const clients = new Map();
 
-io.on('connection', (socket) => {
+signalingNamespace.on('connection', (socket) => {
   const userId = socket.handshake.query.userId.toString(); // Ensure userId is a string
   console.log(`New client connected with user ID: ${userId}`);
   clients.set(userId, socket);
@@ -102,5 +105,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(8080, () => {
-  console.log('Socket.IO signaling server running on http://localhost:8080');
+  console.log('Socket.IO signaling server running on port 8080 path/signaling');
 });
