@@ -1,6 +1,6 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://jamesgraham97.github.io', 'https://unipro.hopto.org'
+    origins 'https://jamesgraham97.github.io', 'https://unipro.hopto.org' ,'http://localhost:3001'
 
     resource '*',
       headers: :any,
